@@ -51,8 +51,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'migrate_sql',
-    'test_app',
-    'test_app2',
+    'tests.test_app',
+    'tests.test_app2',
 )
 
 MIDDLEWARE = (
