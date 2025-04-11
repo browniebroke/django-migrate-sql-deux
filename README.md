@@ -1,8 +1,5 @@
 # django-migrate-sql-deux
 
-> [!NOTE]
-> This package is a fork of the `django-migrate-sql` package, originally published by Bogdan Klichuk. This package appears unmaintained, so we decided to start a fork as we depended on it. Most of the code is from the original author.
-
 <p align="center">
   <a href="https://github.com/browniebroke/django-migrate-sql-deux/actions/workflows/ci.yml?query=branch%3Amain">
     <img src="https://img.shields.io/github/actions/workflow/status/browniebroke/django-migrate-sql-deux/ci.yml?branch=main&label=CI&logo=github&style=flat-square" alt="CI Status" >
@@ -37,6 +34,9 @@
 ---
 
 Django Migrations support for raw SQL.
+
+> [!NOTE]
+> This package is a fork of the `django-migrate-sql` package, originally published by Bogdan Klichuk. This package appears unmaintained, so we decided to start a fork as we depended on it. Most of the code is from the original author.
 
 ## About
 
