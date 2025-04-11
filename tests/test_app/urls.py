@@ -1,13 +1,6 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
-from django.conf.urls import url
+from django.urls.conf import path
 from django.contrib import admin
 
 urlpatterns = [
-    # Examples:
-    # url(r'^$', 'test_project.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-
-    url(r'^admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
 ]
