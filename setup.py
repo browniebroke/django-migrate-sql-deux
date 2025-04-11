@@ -49,6 +49,7 @@ setup(
     version=VERSION,
     description='Migration support for raw SQL in Django',
     long_description=readme,
+    long_description_content_type='text/markdown',
     author='Bruno Alla',
     author_email='oss@browniebroke.com',
     packages=find_packages(),
