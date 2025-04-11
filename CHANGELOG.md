@@ -2,6 +2,15 @@
 
 <!-- version list -->
 
+## v0.5.3 (2025-04-11)
+
+### Bug Fixes
+
+- Update project URL and update README
+  ([#6](https://github.com/browniebroke/django-migrate-sql-deux/pull/6),
+  [`1d41ba8`](https://github.com/browniebroke/django-migrate-sql-deux/commit/1d41ba8e14fa1929ce656de44b12b1458b0ebeeb))
+
+
 ## v0.5.2 (2025-04-11)
 
 ### Bug Fixes
