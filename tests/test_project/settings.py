@@ -79,7 +79,7 @@ DATABASES = {
         'NAME': 'migrate_sql_test_db',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
+        'HOST': 'localhost',
         'PORT': 5432,
     }
 }
