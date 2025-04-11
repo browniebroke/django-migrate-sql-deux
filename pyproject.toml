@@ -1,0 +1,20 @@
+[tool.semantic_release]
+version_variables = [ "migrate_sql/__init__.py:__version__" ]
+
+[tool.semantic_release.changelog]
+mode = "update"
+exclude_commit_patterns = [
+  "chore.*",
+  "ci.*",
+  "Merge pull request .*",
+]
+
+[tool.semantic_release.changelog.environment]
+keep_trailing_newline = true
+
+[tool.semantic_release.branches.main]
+match = "main"
+
+[tool.semantic_release.branches.noop]
+match = "(?!main$)"
+prerelease = true
