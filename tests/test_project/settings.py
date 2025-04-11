@@ -78,7 +78,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'migrate_sql_test_db',
         'USER': 'postgres',
-        'HOST': 'localhost',
+        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
         'PORT': 5432,
     }
 }
