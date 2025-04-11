@@ -65,10 +65,7 @@ MIDDLEWARE = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'test_app.urls'
-
-WSGI_APPLICATION = 'test_app.wsgi.application'
-
+ROOT_URLCONF = 'tests.urls'
 
 # Database
 # https://docs.djangoproject.com/en/stable/ref/settings/#databases
@@ -102,8 +99,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/stable/howto/static-files/
 
 STATIC_URL = '/static/'
-
-try:
-    from settings_local import *
-except ImportError:
-    pass
