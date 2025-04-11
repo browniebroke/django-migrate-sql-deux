@@ -5,6 +5,7 @@ into regular Django migrations.
 
 import sys
 
+import django
 from django.core.management.commands.makemigrations import Command as MakeMigrationsCommand
 from django.db.migrations.loader import MigrationLoader
 from django.db.migrations import Migration
@@ -21,7 +22,8 @@ class Command(MakeMigrationsCommand):
 
     @no_translations
     def handle(self, *app_labels, **options):
-
+        if django.VERSION >= (4, 1):
+            self.written_files = []
         self.verbosity = options.get('verbosity')
         self.interactive = options.get('interactive')
         self.dry_run = options.get('dry_run', False)
@@ -31,6 +33,11 @@ class Command(MakeMigrationsCommand):
         self.exit_code = options.get('exit_code', False)
         self.include_header = options.get('include_header', True)
         check_changes = options.get('check_changes', False)
+        if django.VERSION >= (4, 1):
+            self.scriptable = options["scriptable"]
+            # If logs and prompts are diverted to stderr, remove the ERROR style.
+            if self.scriptable:
+                self.stderr.style_func = None
 
         # Make sure the app they asked for exists
         app_labels = set(app_labels)
