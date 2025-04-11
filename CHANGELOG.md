@@ -2,6 +2,31 @@
 
 <!-- version list -->
 
+## v0.6.0 (2025-04-11)
+
+### Bug Fixes
+
+- Add missing long_description_content_type to setup call
+  ([`eb96c57`](https://github.com/browniebroke/django-migrate-sql-deux/commit/eb96c57f29deb26fa98645abb0f9ca2f6f66abe2))
+
+### Features
+
+- Add support for Django 3.1
+  ([`f9ad68e`](https://github.com/browniebroke/django-migrate-sql-deux/commit/f9ad68e1ed30da2f2b583a2bac953a3ff43c878b))
+
+- Add support for Django 3.2
+  ([`660e924`](https://github.com/browniebroke/django-migrate-sql-deux/commit/660e924a999244529964646388014fef78148226))
+
+- Add support for Django 4.0
+  ([`73c3743`](https://github.com/browniebroke/django-migrate-sql-deux/commit/73c374364745d957d60973d2e7c33cce3b12915b))
+
+- Add support for Python 3.10
+  ([`0e8ac4d`](https://github.com/browniebroke/django-migrate-sql-deux/commit/0e8ac4ddb42325f13eb4366f569eb376a7fa652a))
+
+- Add support for Python 3.8 and 3.9
+  ([`e557917`](https://github.com/browniebroke/django-migrate-sql-deux/commit/e557917ceb37a91d260a367b56408dd62df9f5c4))
+
+
 ## v0.5.3 (2025-04-11)
 
 ### Bug Fixes
