@@ -38,7 +38,7 @@ def get_version(package):
     return re.search("__version__ = ['\"]([^'\"]+)['\"]", init_py).group(1)
 
 
-with open('README.rst') as readme_file:
+with open('README.md') as readme_file:
     readme = readme_file.read()
 
 
@@ -49,8 +49,8 @@ setup(
     version=VERSION,
     description='Migration support for raw SQL in Django',
     long_description=readme,
-    author='Festicket',
-    author_email='dev@festicket.com',
+    author='Bruno Alla',
+    author_email='oss@browniebroke.com',
     packages=find_packages(),
     package_dir={'migrate_sql': 'migrate_sql'},
     license='BSD',
