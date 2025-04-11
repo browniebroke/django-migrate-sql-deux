@@ -55,7 +55,7 @@ setup(
     package_dir={'migrate_sql': 'migrate_sql'},
     license='BSD',
     zip_safe=False,
-    url='https://github.com/festicket/django-migrate-sql',
+    url='https://github.com/browniebroke/django-migrate-sql-deux',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Framework :: Django',
