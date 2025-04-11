@@ -68,6 +68,7 @@ MIDDLEWARE = (
 ROOT_URLCONF = 'test_app.urls'
 
 WSGI_APPLICATION = 'test_app.wsgi.application'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 
 # Database
