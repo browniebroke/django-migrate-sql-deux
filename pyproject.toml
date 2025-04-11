@@ -1,4 +1,5 @@
 [tool.semantic_release]
+tag_format = "v{version}"
 version_variables = [ "migrate_sql/__init__.py:__version__" ]
 
 [tool.semantic_release.changelog]
