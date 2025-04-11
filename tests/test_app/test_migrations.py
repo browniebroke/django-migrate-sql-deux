@@ -7,7 +7,11 @@ import os
 
 from contextlib import contextmanager
 from importlib import import_module
-from psycopg2.extras import register_composite, CompositeCaster
+try:
+    from psycopg2.extras import register_composite, CompositeCaster
+except ImportError:
+    register_composite = lambda *a, **kw: None
+    CompositeCaster = object
 
 try:
     from StringIO import StringIO
@@ -22,8 +26,9 @@ from django.core.management import call_command
 from django.conf import settings
 from django.test.utils import extend_sys_path
 
-from test_app.models import Book
 from migrate_sql.config import SQLItem
+
+from .models import Book
 
 
 class TupleComposite(CompositeCaster):
