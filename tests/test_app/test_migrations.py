@@ -22,8 +22,9 @@ from django.core.management import call_command
 from django.conf import settings
 from django.test.utils import extend_sys_path
 
-from test_app.models import Book
 from migrate_sql.config import SQLItem
+
+from .models import Book
 
 
 class TupleComposite(CompositeCaster):
@@ -107,8 +108,8 @@ class BaseMigrateSQLTestCase(TestCase):
     """
     def setUp(self):
         super(BaseMigrateSQLTestCase, self).setUp()
-        self.config = import_module('test_app.sql_config')
-        self.config2 = import_module('test_app2.sql_config')
+        self.config = import_module('tests.test_app.sql_config')
+        self.config2 = import_module('tests.test_app2.sql_config')
         self.out = StringIO()
 
     def tearDown(self):
@@ -517,7 +518,7 @@ class SQLDependenciesTestCase(BaseMigrateSQLTestCase):
         )
         self.check_migrations(
             expected_content, migrations,
-            module='test_app.migrations_deps_update', module2='test_app2.migrations_deps_update',
+            module='tests.test_app.migrations_deps_update', module2='tests.test_app2.migrations_deps_update',
         )
 
     def test_deps_circular(self):
@@ -535,8 +536,8 @@ class SQLDependenciesTestCase(BaseMigrateSQLTestCase):
         with self.assertRaises(CircularDependencyError):
             self.check_migrations(
                 {}, (),
-                module='test_app.migrations_deps_update',
-                module2='test_app2.migrations_deps_update',
+                module='tests.test_app.migrations_deps_update',
+                module2='tests.test_app2.migrations_deps_update',
             )
 
     def test_deps_no_changes(self):
@@ -557,7 +558,7 @@ class SQLDependenciesTestCase(BaseMigrateSQLTestCase):
         migrations = ()
         self.check_migrations(
             expected_content, migrations,
-            module='test_app.migrations_deps_update', module2='test_app2.migrations_deps_update',
+            module='tests.test_app.migrations_deps_update', module2='tests.test_app2.migrations_deps_update',
         )
 
     def test_deps_delete(self):
@@ -594,5 +595,5 @@ class SQLDependenciesTestCase(BaseMigrateSQLTestCase):
         )
         self.check_migrations(
             expected_content, migrations,
-            module='test_app.migrations_deps_delete', module2='test_app2.migrations_deps_delete',
+            module='tests.test_app.migrations_deps_delete', module2='tests.test_app2.migrations_deps_delete',
         )
