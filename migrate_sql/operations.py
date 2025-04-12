@@ -1,5 +1,8 @@
+import django
 from django.db.migrations.operations import RunSQL
 from django.db.migrations.operations.base import Operation
+if django.VERSION >= (5, 1):
+    from django.db.migrations.operations.base import OperationCategory
 
 from migrate_sql.graph import SQLStateGraph
 from migrate_sql.config import SQLItem
@@ -20,6 +23,10 @@ class AlterSQLState(MigrateSQLMixin, Operation):
     Alters in-memory state of SQL item.
     This operation is generated separately from others since it does not affect database.
     """
+
+    if django.VERSION >= (5, 1):
+        category = OperationCategory.PYTHON
+
     def describe(self):
         return 'Alter SQL state "{name}"'.format(name=self.name)
 
@@ -86,6 +93,10 @@ class BaseAlterSQL(MigrateSQLMixin, RunSQL):
     """
     Base class for operations that alter database.
     """
+
+    if django.VERSION >= (5, 1):
+        category = OperationCategory.SQL
+
     def __init__(self, name, sql, reverse_sql=None, state_operations=None, hints=None):
         super(BaseAlterSQL, self).__init__(sql, reverse_sql=reverse_sql,
                                            state_operations=state_operations, hints=hints)
@@ -98,6 +109,10 @@ class BaseAlterSQL(MigrateSQLMixin, RunSQL):
 
 
 class ReverseAlterSQL(BaseAlterSQL):
+
+    if django.VERSION >= (5, 1):
+        category = OperationCategory.ALTERATION
+
     def describe(self):
         return 'Reverse alter SQL "{name}"'.format(name=self.name)
 
@@ -106,6 +121,10 @@ class AlterSQL(BaseAlterSQL):
     """
     Updates SQL item with a new version.
     """
+
+    if django.VERSION >= (5, 1):
+        category = OperationCategory.ALTERATION
+
     def __init__(self, name, sql, reverse_sql=None, state_operations=None, hints=None,
                  state_reverse_sql=None):
         """
@@ -150,6 +169,10 @@ class CreateSQL(BaseAlterSQL):
     """
     Creates new SQL item in database.
     """
+
+    if django.VERSION >= (5, 1):
+        category = OperationCategory.ADDITION
+
     def describe(self):
         return 'Create SQL "{name}"'.format(name=self.name)
 
@@ -183,6 +206,10 @@ class DeleteSQL(BaseAlterSQL):
     """
     Deltes SQL item from database.
     """
+
+    if django.VERSION >= (5, 1):
+        category = OperationCategory.REMOVAL
+
     def describe(self):
         return 'Delete SQL "{name}"'.format(name=self.name)
 

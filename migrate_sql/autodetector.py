@@ -1,6 +1,10 @@
+import django
+from django.conf import settings
 from django.db.migrations.autodetector import MigrationAutodetector as DjangoMigrationAutodetector
 from django.db.migrations.operations import RunSQL
 from django.utils.datastructures import OrderedSet
+if django.VERSION >= (5, 1):
+    from django.db.migrations.autodetector import OperationDependency
 
 from migrate_sql.operations import (AlterSQL, ReverseAlterSQL, CreateSQL, DeleteSQL, AlterSQLState)
 from migrate_sql.graph import SQLStateGraph
@@ -132,7 +136,18 @@ class MigrationAutodetector(DjangoMigrationAutodetector):
         Add SQL operation and register it to be used as dependency for further
         sequential operations.
         """
-        deps = [(dp[0], SQL_BLOB, dp[1], self._sql_operations.get(dp)) for dp in dependencies]
+        if django.VERSION >= (5, 1):
+            deps = [
+                OperationDependency(
+                    app_label=dp[0],
+                    model_name=SQL_BLOB,
+                    field_name=dp[1],
+                    type=self._sql_operations.get(dp),
+                )
+                for dp in dependencies
+            ]
+        else:
+            deps = [(dp[0], SQL_BLOB, dp[1], self._sql_operations.get(dp)) for dp in dependencies]
 
         self.add_operation(app_label, operation, dependencies=deps)
         self._sql_operations[(app_label, sql_name)] = operation
@@ -259,10 +274,18 @@ class MigrationAutodetector(DjangoMigrationAutodetector):
         """
         Enhances default behavior of method by checking dependency for matching operation.
         """
-        if isinstance(dependency[1], SQLBlob):
-            # NOTE: we follow the sort order created by `assemble_changes` so we build a fixed chain
-            # of operations. thus we should match exact operation here.
-            return dependency[3] == operation
+        if django.VERSION >= (5, 1):
+            # dependency is a named tuple
+            if isinstance(dependency.model_name, SQLBlob):
+                # NOTE: we follow the sort order created by `assemble_changes` so we build a fixed chain
+                # of operations. thus we should match exact operation here.
+                return dependency.type == operation
+        else:
+            # dependency is a tuple
+            if isinstance(dependency[1], SQLBlob):
+                # NOTE: we follow the sort order created by `assemble_changes` so we build a fixed chain
+                # of operations. thus we should match exact operation here.
+                return dependency[3] == operation
         return super(MigrationAutodetector, self).check_dependency(operation, dependency)
 
     def generate_altered_fields(self):
@@ -274,3 +297,30 @@ class MigrationAutodetector(DjangoMigrationAutodetector):
         result = super(MigrationAutodetector, self).generate_altered_fields()
         self.generate_sql_changes()
         return result
+
+    @staticmethod
+    def _resolve_dependency(dependency):
+        """
+        Return the resolved dependency and a boolean denoting whether or not
+        it was swappable.
+        """
+        if dependency[0] != "__setting__":
+            return dependency, False
+        resolved_app_label, resolved_object_name = getattr(
+            settings, dependency[1]
+        ).split(".")
+        if django.VERSION >= (5, 1):
+            return (
+                OperationDependency(
+                    resolved_app_label,
+                    resolved_object_name.lower(),
+                    dependency[2],
+                    dependency[3],
+                ),
+                True,
+            )
+        else:
+            return (
+                (resolved_app_label, resolved_object_name.lower()) + dependency[2:],
+                True
+            )
