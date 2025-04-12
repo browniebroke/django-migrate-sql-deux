@@ -2,6 +2,41 @@
 
 <!-- version list -->
 
+## v0.7.0 (2025-04-12)
+
+### Features
+
+- Add support for Django 4.1
+  ([`53997f6`](https://github.com/browniebroke/django-migrate-sql-deux/commit/53997f65961c0f1b36d124432f496cbb1725e988))
+
+- Add support for Django 4.2
+  ([`a1599ec`](https://github.com/browniebroke/django-migrate-sql-deux/commit/a1599ec5e836140e2c1d035af29dcc604c63b6aa))
+
+- Add support for Django 5.0
+  ([`97faea1`](https://github.com/browniebroke/django-migrate-sql-deux/commit/97faea1a495638899a0ba05628c47cc9edba5824))
+
+- Add support for Django 5.1
+  ([`46bce08`](https://github.com/browniebroke/django-migrate-sql-deux/commit/46bce08a4ae020015594645a42b100f8ca71db96))
+
+- Add support for Django 5.2
+  ([`dd49703`](https://github.com/browniebroke/django-migrate-sql-deux/commit/dd4970395d58099a77cb5eb5307a266c5ee61005))
+
+- Add support for Python 3.11
+  ([`aa4549c`](https://github.com/browniebroke/django-migrate-sql-deux/commit/aa4549caacce7a83db8ff9997f96d1163934eb18))
+
+- Add support for Python 3.12
+  ([`3c8472f`](https://github.com/browniebroke/django-migrate-sql-deux/commit/3c8472f24fbf06606a770b120beaa437e0d5070f))
+
+- Add support for Python 3.13
+  ([`22d9078`](https://github.com/browniebroke/django-migrate-sql-deux/commit/22d90784e179f885b87b617ffdcf46abbc9a1664))
+
+- Drop support for Django <3.2
+  ([`35e90d8`](https://github.com/browniebroke/django-migrate-sql-deux/commit/35e90d8f3911d25f03df7d3f13b4a1b667ddfe06))
+
+- Drop support for Python <3.9
+  ([`73252f3`](https://github.com/browniebroke/django-migrate-sql-deux/commit/73252f333b4b87c1f0586874039d74b523e88580))
+
+
 ## v0.6.0 (2025-04-11)
 
 ### Bug Fixes
