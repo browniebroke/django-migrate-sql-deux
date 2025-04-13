@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import migrate_sql.operations
+import django_migrate_sql.operations
 
 
 class Migration(migrations.Migration):
@@ -13,12 +13,12 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrate_sql.operations.ReverseAlterSQL(
+        django_migrate_sql.operations.ReverseAlterSQL(
             name='sale',
             sql='DROP TYPE sale',
             reverse_sql='CREATE TYPE sale AS (arg1 int); -- 1',
         ),
-        migrate_sql.operations.AlterSQL(
+        django_migrate_sql.operations.AlterSQL(
             name='sale',
             sql='CREATE TYPE sale AS (arg1 int, arg2 int); -- 2',
             reverse_sql='DROP TYPE sale',

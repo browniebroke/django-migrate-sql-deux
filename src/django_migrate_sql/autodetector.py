@@ -6,8 +6,8 @@ from django.utils.datastructures import OrderedSet
 if django.VERSION >= (5, 1):
     from django.db.migrations.autodetector import OperationDependency
 
-from migrate_sql.operations import (AlterSQL, ReverseAlterSQL, CreateSQL, DeleteSQL, AlterSQLState)
-from migrate_sql.graph import SQLStateGraph
+from .operations import (AlterSQL, ReverseAlterSQL, CreateSQL, DeleteSQL, AlterSQLState)
+from .graph import SQLStateGraph
 
 
 class SQLBlob(object):

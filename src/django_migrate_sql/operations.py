@@ -4,8 +4,8 @@ from django.db.migrations.operations.base import Operation
 if django.VERSION >= (5, 1):
     from django.db.migrations.operations.base import OperationCategory
 
-from migrate_sql.graph import SQLStateGraph
-from migrate_sql.config import SQLItem
+from .graph import SQLStateGraph
+from .config import SQLItem
 
 
 class MigrateSQLMixin(object):
