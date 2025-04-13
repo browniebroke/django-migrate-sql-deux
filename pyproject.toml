@@ -1,9 +1,138 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [ "setuptools" ]
+
+[project]
+name = "django-migrate-sql-deux"
+version = "0.7.0"
+description = "Django Migrations for raw SQL"
+readme = "README.md"
+license = { text = "BSD" }
+authors = [
+  { name = "Bogdan Klichuk", email = "klichukb@gmail.com" },
+  { name = "Bruno Alla", email = "oss@browniebroke.com" },
+]
+requires-python = ">=3.9"
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Natural Language :: English",
+  "Operating System :: OS Independent",
+  "Framework :: Django",
+  "Framework :: Django :: 4.2",
+  "Framework :: Django :: 5.0",
+  "Framework :: Django :: 5.1",
+  "Framework :: Django :: 5.2",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Libraries",
+]
+
+dependencies = [
+  "django>=4.2",
+]
+urls."Bug Tracker" = "https://github.com/browniebroke/django-migrate-sql-deux/issues"
+urls.Changelog = "https://github.com/browniebroke/django-migrate-sql-deux/blob/main/CHANGELOG.md"
+urls.repository = "https://github.com/browniebroke/django-migrate-sql-deux"
+
+[dependency-groups]
+dev = [
+  "psycopg2>=2.6.1,<2.9;python_version<'3.11'",
+  "psycopg2>=2.9;python_version>='3.11'",
+  "pytest>=8,<9",
+  "pytest-cov>=6,<7",
+  "pytest-django>=4.5,<5",
+]
+
+[tool.ruff]
+line-length = 88
+lint.select = [
+  "B",   # flake8-bugbear
+  "D",   # flake8-docstrings
+  "C4",  # flake8-comprehensions
+  "S",   # flake8-bandit
+  "F",   # pyflake
+  "E",   # pycodestyle
+  "W",   # pycodestyle
+  "UP",  # pyupgrade
+  "I",   # isort
+  "RUF", # ruff specific
+]
+lint.ignore = [
+  "D203", # 1 blank line required before class docstring
+  "D212", # Multi-line docstring summary should start at the first line
+  "D100", # Missing docstring in public module
+  "D104", # Missing docstring in public package
+  "D107", # Missing docstring in `__init__`
+  "D401", # First line of docstring should be in imperative mood
+]
+lint.per-file-ignores."conftest.py" = [ "D100" ]
+lint.per-file-ignores."setup.py" = [ "D100" ]
+lint.per-file-ignores."tests/**/*" = [
+  "D100",
+  "D101",
+  "D102",
+  "D103",
+  "D104",
+  "S101",
+]
+lint.isort.known-first-party = [ "django_migrate_sql", "tests" ]
+
+[tool.pytest.ini_options]
+addopts = """\
+    -v
+    -Wdefault
+    --cov=django_migrate_sql
+    --cov-report=term
+    --cov-report=xml
+    --ds=tests.settings
+    """
+pythonpath = [ "src" ]
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  "@overload",
+  "if TYPE_CHECKING",
+  "raise NotImplementedError",
+  'if __name__ == "__main__":',
+]
+
+[tool.mypy]
+check_untyped_defs = true
+disallow_any_generics = true
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+mypy_path = "src/"
+no_implicit_optional = true
+show_error_codes = true
+warn_unreachable = true
+warn_unused_ignores = true
+exclude = [
+  'setup.py',
+]
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+allow_untyped_defs = true
+
 [tool.semantic_release]
+version_toml = [ "pyproject.toml:project.version" ]
 tag_format = "v{version}"
-version_variables = [ "migrate_sql/__init__.py:__version__" ]
+version_variables = [
+  "src/migrate_sql/__init__.py:__version__"
+]
 build_command = """
-pip install build
-python -m build
+pip install uv
+uv lock
+git add uv.lock
+uv build
 """
 
 [tool.semantic_release.changelog]
