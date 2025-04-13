@@ -14,8 +14,8 @@ from django.db.migrations.questioner import InteractiveMigrationQuestioner
 from django.apps import apps
 from django.db.migrations.state import ProjectState
 
-from migrate_sql.autodetector import MigrationAutodetector
-from migrate_sql.graph import build_current_graph
+from ...autodetector import MigrationAutodetector
+from ...graph import build_current_graph
 
 
 class Command(MakeMigrationsCommand):

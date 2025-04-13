@@ -50,9 +50,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'migrate_sql',
-    'test_app',
-    'test_app2',
+    'django_migrate_sql',
+    'tests.test_app',
+    'tests.test_app2',
 )
 
 MIDDLEWARE = (
@@ -65,9 +65,8 @@ MIDDLEWARE = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'test_app.urls'
+ROOT_URLCONF = 'tests.urls'
 
-WSGI_APPLICATION = 'test_app.wsgi.application'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 
