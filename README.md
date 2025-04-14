@@ -74,7 +74,22 @@ INSTALLED_APPS = [
 ]
 ```
 
-App defines a custom `makemigrations` command, that inherits from Django's core one, so in order `django_migrate_sql` app to kick in put it after any other apps that redefine `makemigrations` command too.
+App defines a custom `makemigrations` command, that inherits from Django's core one, so in order `django_migrate_sql` app to kick in, put it **before** any other apps that redefine `makemigrations` command too, following [the official guide](https://docs.djangoproject.com/en/stable/howto/custom-management-commands/#overriding-commands) on how to override commands.
+
+### Integrations with other apps
+
+If you want functionality from multiple `makemigrations` commands provided by other apps, you may have to create your own command, inheriting from all the base commands. The core functionality is provided as a mixin `DjangoMigrateSQLMixin` to make this easier. For instance, to integrate with [`django-linear-migrations`](https://github.com/adamchainz/django-linear-migrations), you would write a `makemigrations` command along these lines:
+
+```python
+# app1/management/commands/makemigrations.py
+from django_linear_migrations.management.commands.makemigrations import Command as LinearMigrationsMakeMigrationsCommand
+from django_migrate_sql.management.commands.makemigrations import DjangoMigrateSQLMixin
+
+class Command(DjangoMigrateSQLMixin, LinearMigrationsMakeMigrationsCommand):
+    pass
+```
+
+Again, you should make sure that the app where your custom command is implemented is placed above all the other apps.
 
 ## Usage
 
