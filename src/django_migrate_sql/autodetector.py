@@ -9,7 +9,7 @@ from django.utils.datastructures import OrderedSet
 if django.VERSION >= (5, 1):
     from django.db.migrations.autodetector import OperationDependency
 
-from .graph import SQLStateGraph
+from .graph import SQLStateGraph, build_current_graph
 from .operations import AlterSQL, AlterSQLState, CreateSQL, DeleteSQL, ReverseAlterSQL
 
 
@@ -98,7 +98,7 @@ class MigrationAutodetector(DjangoMigrationAutodetector):
 
     def __init__(self, from_state, to_state, questioner=None, to_sql_graph=None):
         super().__init__(from_state, to_state, questioner)
-        self.to_sql_graph = to_sql_graph
+        self.to_sql_graph = to_sql_graph or build_current_graph()
         self.from_sql_graph = getattr(self.from_state, "sql_state", None) or SQLStateGraph()
         self.from_sql_graph.build_graph()
         self._sql_operations = []
