@@ -32,7 +32,7 @@ def _sql_params(sql):
         if elements == 2:
             sql, params = sql
         else:
-            raise ValueError("Expected a 2-tuple but got %d" % elements)
+            raise ValueError(f"Expected a 2-tuple but got {elements:d}")
     return sql, params
 
 
@@ -40,7 +40,7 @@ def is_sql_equal(sqls1, sqls2):
     """
     Find out equality of two SQL items.
 
-    See https://docs.djangoproject.com/en/1.8/ref/migration-operations/#runsql.
+    See https://docs.djangoproject.com/en/stable/ref/migration-operations/#runsql.
 
     Args:
         sqls1, sqls2: SQL items, have the same format as supported by Django's RunSQL operation.
