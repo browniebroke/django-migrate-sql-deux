@@ -2,6 +2,44 @@
 
 <!-- version list -->
 
+## v1.0.0 (2025-04-14)
+
+### Bug Fixes
+
+- Update PSR config to fix automated releases
+  ([`5c77f58`](https://github.com/browniebroke/django-migrate-sql-deux/commit/5c77f58f673a1ed883b91f169a033285f7b81f00))
+
+### Features
+
+- Migrate to pyproject.toml
+  ([`2d3c547`](https://github.com/browniebroke/django-migrate-sql-deux/commit/2d3c5476f72c67b9c49863fde6e3e53939ac0150))
+
+BREAKING CHANGE: drop support for Django <4.2
+
+### Refactoring
+
+- Rename package to django_migrate_sql
+  ([`c3bc1df`](https://github.com/browniebroke/django-migrate-sql-deux/commit/c3bc1df60e1c7580666f6978025391f2a279d3fd))
+
+BREAKING CHANGE: rename package from `migrate_sql` to `django_migrate_sql` to follow Django reusable
+  apps best practices
+
+### Testing
+
+- Re-organise test project
+  ([`3417b0f`](https://github.com/browniebroke/django-migrate-sql-deux/commit/3417b0f6ae966fa4c89703facd04da09375fe2fa))
+
+- Update tox file to run with uv
+  ([`479a0af`](https://github.com/browniebroke/django-migrate-sql-deux/commit/479a0af2a294256980513a6e40cd1cc56ac3a52b))
+
+### Breaking Changes
+
+- Drop support for Django <4.2
+
+- Rename package from `migrate_sql` to `django_migrate_sql` to follow Django reusable apps best
+  practices
+
+
 ## v0.7.0 (2025-04-12)
 
 ### Features
