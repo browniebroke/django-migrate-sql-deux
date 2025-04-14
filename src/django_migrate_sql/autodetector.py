@@ -98,9 +98,7 @@ class MigrationAutodetector(DjangoMigrationAutodetector):
     def __init__(self, from_state, to_state, questioner=None, to_sql_graph=None):
         super(MigrationAutodetector, self).__init__(from_state, to_state, questioner)
         self.to_sql_graph = to_sql_graph
-        self.from_sql_graph = (
-            getattr(self.from_state, "sql_state", None) or SQLStateGraph()
-        )
+        self.from_sql_graph = getattr(self.from_state, "sql_state", None) or SQLStateGraph()
         self.from_sql_graph.build_graph()
         self._sql_operations = []
 
@@ -130,9 +128,7 @@ class MigrationAutodetector(DjangoMigrationAutodetector):
             sql_item = sql_state.nodes[key]
             ancs = get_ancestors(node)[:-1]
             ancs.reverse()
-            pos = next(
-                (i for i, k in enumerate(result_keys) if k in ancs), len(result_keys)
-            )
+            pos = next((i for i, k in enumerate(result_keys) if k in ancs), len(result_keys))
             result_keys.insert(pos, key)
 
             if key in resolve_keys and not sql_item.replace:
@@ -161,10 +157,7 @@ class MigrationAutodetector(DjangoMigrationAutodetector):
                 for dp in dependencies
             ]
         else:
-            deps = [
-                (dp[0], SQL_BLOB, dp[1], self._sql_operations.get(dp))
-                for dp in dependencies
-            ]
+            deps = [(dp[0], SQL_BLOB, dp[1], self._sql_operations.get(dp)) for dp in dependencies]
 
         self.add_operation(app_label, operation, dependencies=deps)
         self._sql_operations[(app_label, sql_name)] = operation
@@ -179,17 +172,11 @@ class MigrationAutodetector(DjangoMigrationAutodetector):
             app_label, sql_name = key
             old_item = self.from_sql_graph.nodes[key]
             new_item = self.to_sql_graph.nodes[key]
-            if (
-                not old_item.reverse_sql
-                or old_item.reverse_sql == RunSQL.noop
-                or new_item.replace
-            ):
+            if not old_item.reverse_sql or old_item.reverse_sql == RunSQL.noop or new_item.replace:
                 continue
 
             # migrate backwards
-            operation = ReverseAlterSQL(
-                sql_name, old_item.reverse_sql, reverse_sql=old_item.sql
-            )
+            operation = ReverseAlterSQL(sql_name, old_item.reverse_sql, reverse_sql=old_item.sql)
             sql_deps = [n.key for n in self.from_sql_graph.node_map[key].children]
             sql_deps.append(key)
             self.add_sql_operation(app_label, sql_name, operation, sql_deps)
@@ -215,9 +202,7 @@ class MigrationAutodetector(DjangoMigrationAutodetector):
                 operation_cls = CreateSQL
                 kwargs = {"dependencies": list(sql_deps)}
 
-            operation = operation_cls(
-                sql_name, new_item.sql, reverse_sql=reverse_sql, **kwargs
-            )
+            operation = operation_cls(sql_name, new_item.sql, reverse_sql=reverse_sql, **kwargs)
             sql_deps.append(key)
             self.add_sql_operation(app_label, sql_name, operation, sql_deps)
 
@@ -251,9 +236,7 @@ class MigrationAutodetector(DjangoMigrationAutodetector):
         for key in delete_keys:
             app_label, sql_name = key
             old_node = self.from_sql_graph.nodes[key]
-            operation = DeleteSQL(
-                sql_name, old_node.reverse_sql, reverse_sql=old_node.sql
-            )
+            operation = DeleteSQL(sql_name, old_node.reverse_sql, reverse_sql=old_node.sql)
             sql_deps = [n.key for n in self.from_sql_graph.node_map[key].children]
             sql_deps.append(key)
             self.add_sql_operation(app_label, sql_name, operation, sql_deps)
@@ -314,9 +297,7 @@ class MigrationAutodetector(DjangoMigrationAutodetector):
                 # NOTE: we follow the sort order created by `assemble_changes` so we build a fixed chain
                 # of operations. thus we should match exact operation here.
                 return dependency[3] == operation
-        return super(MigrationAutodetector, self).check_dependency(
-            operation, dependency
-        )
+        return super(MigrationAutodetector, self).check_dependency(operation, dependency)
 
     def generate_altered_fields(self):
         """
@@ -336,9 +317,7 @@ class MigrationAutodetector(DjangoMigrationAutodetector):
         """
         if dependency[0] != "__setting__":
             return dependency, False
-        resolved_app_label, resolved_object_name = getattr(
-            settings, dependency[1]
-        ).split(".")
+        resolved_app_label, resolved_object_name = getattr(settings, dependency[1]).split(".")
         if django.VERSION >= (5, 1):
             return (
                 OperationDependency(
