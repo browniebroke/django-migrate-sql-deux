@@ -56,13 +56,13 @@ class SQLStateGraph:
         for child, parents in self.dependencies.items():
             if child not in self.nodes:
                 raise NodeNotFoundError(
-                    "App %s SQL item dependencies reference nonexistent child node %r" % (child[0], child),
+                    f"App {child[0]} SQL item dependencies reference nonexistent child node {child!r}",
                     child,
                 )
             for parent in parents:
                 if parent not in self.nodes:
                     raise NodeNotFoundError(
-                        "App %s SQL item dependencies reference nonexistent parent node %r" % (child[0], parent),
+                        f"App {child[0]} SQL item dependencies reference nonexistent parent node {parent!r}",
                         parent,
                     )
                 self.node_map[child].add_parent(self.node_map[parent])
@@ -83,7 +83,7 @@ class SQLStateGraph:
                 for node in get_children(top):
                     if node in stack:
                         cycle = stack[stack.index(node) :]
-                        raise CircularDependencyError(", ".join("%s.%s" % n for n in cycle))
+                        raise CircularDependencyError(", ".join("{}.{}".format(*n) for n in cycle))
                     if node in todo:
                         stack.append(node)
                         todo.remove(node)

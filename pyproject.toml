@@ -82,6 +82,7 @@ lint.per-file-ignores."tests/**/*" = [
   "S101",
 ]
 lint.per-file-ignores."tests/**/migrations*/*" = [
+  "E501",
   "RUF012",
 ]
 lint.isort.known-first-party = [ "django_migrate_sql", "tests" ]

@@ -96,7 +96,7 @@ class MigrationAutodetector(DjangoMigrationAutodetector):
     """
 
     def __init__(self, from_state, to_state, questioner=None, to_sql_graph=None):
-        super(MigrationAutodetector, self).__init__(from_state, to_state, questioner)
+        super().__init__(from_state, to_state, questioner)
         self.to_sql_graph = to_sql_graph
         self.from_sql_graph = getattr(self.from_state, "sql_state", None) or SQLStateGraph()
         self.from_sql_graph.build_graph()
@@ -297,7 +297,7 @@ class MigrationAutodetector(DjangoMigrationAutodetector):
                 # NOTE: we follow the sort order created by `assemble_changes` so we build a fixed chain
                 # of operations. thus we should match exact operation here.
                 return dependency[3] == operation
-        return super(MigrationAutodetector, self).check_dependency(operation, dependency)
+        return super().check_dependency(operation, dependency)
 
     def generate_altered_fields(self):
         """
@@ -305,7 +305,7 @@ class MigrationAutodetector(DjangoMigrationAutodetector):
         divided into smaller methods/functions for easier enhancement and substitution.
         So far we're doing all the SQL magic in this method.
         """
-        result = super(MigrationAutodetector, self).generate_altered_fields()
+        result = super().generate_altered_fields()
         self.generate_sql_changes()
         return result
 

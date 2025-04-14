@@ -100,13 +100,11 @@ class BaseAlterSQL(MigrateSQLMixin, RunSQL):
         category = OperationCategory.SQL
 
     def __init__(self, name, sql, reverse_sql=None, state_operations=None, hints=None):
-        super(BaseAlterSQL, self).__init__(
-            sql, reverse_sql=reverse_sql, state_operations=state_operations, hints=hints
-        )
+        super().__init__(sql, reverse_sql=reverse_sql, state_operations=state_operations, hints=hints)
         self.name = name
 
     def deconstruct(self):
-        name, args, kwargs = super(BaseAlterSQL, self).deconstruct()
+        name, args, kwargs = super().deconstruct()
         kwargs["name"] = self.name
         return (name, args, kwargs)
 
@@ -146,7 +144,7 @@ class AlterSQL(BaseAlterSQL):
                 `replace` = `True`.
 
         """
-        super(AlterSQL, self).__init__(
+        super().__init__(
             name,
             sql,
             reverse_sql=reverse_sql,
@@ -156,7 +154,7 @@ class AlterSQL(BaseAlterSQL):
         self.state_reverse_sql = state_reverse_sql
 
     def deconstruct(self):
-        name, args, kwargs = super(AlterSQL, self).deconstruct()
+        name, args, kwargs = super().deconstruct()
         kwargs["name"] = self.name
         if self.state_reverse_sql:
             kwargs["state_reverse_sql"] = self.state_reverse_sql
@@ -166,7 +164,7 @@ class AlterSQL(BaseAlterSQL):
         return f'Alter SQL "{self.name}"'
 
     def state_forwards(self, app_label, state):
-        super(AlterSQL, self).state_forwards(app_label, state)
+        super().state_forwards(app_label, state)
         sql_state = self.get_sql_state(state)
         key = (app_label, self.name)
 
@@ -192,7 +190,7 @@ class CreateSQL(BaseAlterSQL):
         return f'Create SQL "{self.name}"'
 
     def deconstruct(self):
-        name, args, kwargs = super(CreateSQL, self).deconstruct()
+        name, args, kwargs = super().deconstruct()
         kwargs["name"] = self.name
         if self.dependencies:
             kwargs["dependencies"] = self.dependencies
@@ -207,7 +205,7 @@ class CreateSQL(BaseAlterSQL):
         hints=None,
         dependencies=None,
     ):
-        super(CreateSQL, self).__init__(
+        super().__init__(
             name,
             sql,
             reverse_sql=reverse_sql,
@@ -217,7 +215,7 @@ class CreateSQL(BaseAlterSQL):
         self.dependencies = dependencies or ()
 
     def state_forwards(self, app_label, state):
-        super(CreateSQL, self).state_forwards(app_label, state)
+        super().state_forwards(app_label, state)
         sql_state = self.get_sql_state(state)
 
         sql_state.add_node(
@@ -239,7 +237,7 @@ class DeleteSQL(BaseAlterSQL):
         return f'Delete SQL "{self.name}"'
 
     def state_forwards(self, app_label, state):
-        super(DeleteSQL, self).state_forwards(app_label, state)
+        super().state_forwards(app_label, state)
         sql_state = self.get_sql_state(state)
 
         sql_state.remove_node((app_label, self.name))
