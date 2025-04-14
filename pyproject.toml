@@ -126,7 +126,7 @@ allow_untyped_defs = true
 version_toml = [ "pyproject.toml:project.version" ]
 tag_format = "v{version}"
 version_variables = [
-  "src/migrate_sql/__init__.py:__version__"
+  "src/django_migrate_sql/__init__.py:__version__"
 ]
 build_command = """
 pip install uv
