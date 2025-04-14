@@ -79,6 +79,9 @@ lint.per-file-ignores."tests/**/*" = [
   "D104",
   "S101",
 ]
+lint.per-file-ignores."tests/**/migrations*/*" = [
+  "RUF012",
+]
 lint.isort.known-first-party = [ "django_migrate_sql", "tests" ]
 
 [tool.pytest.ini_options]

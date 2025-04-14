@@ -1,20 +1,21 @@
 import django
 from django.db.migrations.operations import RunSQL
 from django.db.migrations.operations.base import Operation
+
 if django.VERSION >= (5, 1):
     from django.db.migrations.operations.base import OperationCategory
 
-from .graph import SQLStateGraph
 from .config import SQLItem
+from .graph import SQLStateGraph
 
 
-class MigrateSQLMixin(object):
+class MigrateSQLMixin:
     def get_sql_state(self, state):
         """
         Get SQLStateGraph from state.
         """
-        if not hasattr(state, 'sql_state'):
-            setattr(state, 'sql_state', SQLStateGraph())
+        if not hasattr(state, "sql_state"):
+            state.sql_state = SQLStateGraph()
         return state.sql_state
 
 
@@ -28,16 +29,16 @@ class AlterSQLState(MigrateSQLMixin, Operation):
         category = OperationCategory.PYTHON
 
     def describe(self):
-        return 'Alter SQL state "{name}"'.format(name=self.name)
+        return f'Alter SQL state "{self.name}"'
 
     def deconstruct(self):
         kwargs = {
-            'name': self.name,
+            "name": self.name,
         }
         if self.add_dependencies:
-            kwargs['add_dependencies'] = self.add_dependencies
+            kwargs["add_dependencies"] = self.add_dependencies
         if self.remove_dependencies:
-            kwargs['remove_dependencies'] = self.remove_dependencies
+            kwargs["remove_dependencies"] = self.remove_dependencies
         return (self.__class__.__name__, [], kwargs)
 
     def state_forwards(self, app_label, state):
@@ -83,6 +84,7 @@ class AlterSQLState(MigrateSQLMixin, Operation):
                 Unordered list of dependencies to add to state.
             remove_dependencies (list):
                 Unordered list of dependencies to remove from state.
+
         """
         self.name = name
         self.add_dependencies = add_dependencies or ()
@@ -98,23 +100,23 @@ class BaseAlterSQL(MigrateSQLMixin, RunSQL):
         category = OperationCategory.SQL
 
     def __init__(self, name, sql, reverse_sql=None, state_operations=None, hints=None):
-        super(BaseAlterSQL, self).__init__(sql, reverse_sql=reverse_sql,
-                                           state_operations=state_operations, hints=hints)
+        super(BaseAlterSQL, self).__init__(
+            sql, reverse_sql=reverse_sql, state_operations=state_operations, hints=hints
+        )
         self.name = name
 
     def deconstruct(self):
         name, args, kwargs = super(BaseAlterSQL, self).deconstruct()
-        kwargs['name'] = self.name
+        kwargs["name"] = self.name
         return (name, args, kwargs)
 
 
 class ReverseAlterSQL(BaseAlterSQL):
-
     if django.VERSION >= (5, 1):
         category = OperationCategory.ALTERATION
 
     def describe(self):
-        return 'Reverse alter SQL "{name}"'.format(name=self.name)
+        return f'Reverse alter SQL "{self.name}"'
 
 
 class AlterSQL(BaseAlterSQL):
@@ -125,8 +127,15 @@ class AlterSQL(BaseAlterSQL):
     if django.VERSION >= (5, 1):
         category = OperationCategory.ALTERATION
 
-    def __init__(self, name, sql, reverse_sql=None, state_operations=None, hints=None,
-                 state_reverse_sql=None):
+    def __init__(
+        self,
+        name,
+        sql,
+        reverse_sql=None,
+        state_operations=None,
+        hints=None,
+        state_reverse_sql=None,
+    ):
         """
         Args:
             name (str): Name of SQL item in current application to alter state for.
@@ -135,20 +144,26 @@ class AlterSQL(BaseAlterSQL):
             state_reverse_sql (str/list): Backward SQL used to alter state of backward SQL
                 *instead* of `reverse_sql`. Used for operations generated for items with
                 `replace` = `True`.
+
         """
-        super(AlterSQL, self).__init__(name, sql, reverse_sql=reverse_sql,
-                                       state_operations=state_operations, hints=hints)
+        super(AlterSQL, self).__init__(
+            name,
+            sql,
+            reverse_sql=reverse_sql,
+            state_operations=state_operations,
+            hints=hints,
+        )
         self.state_reverse_sql = state_reverse_sql
 
     def deconstruct(self):
         name, args, kwargs = super(AlterSQL, self).deconstruct()
-        kwargs['name'] = self.name
+        kwargs["name"] = self.name
         if self.state_reverse_sql:
-            kwargs['state_reverse_sql'] = self.state_reverse_sql
+            kwargs["state_reverse_sql"] = self.state_reverse_sql
         return (name, args, kwargs)
 
     def describe(self):
-        return 'Alter SQL "{name}"'.format(name=self.name)
+        return f'Alter SQL "{self.name}"'
 
     def state_forwards(self, app_label, state):
         super(AlterSQL, self).state_forwards(app_label, state)
@@ -174,19 +189,31 @@ class CreateSQL(BaseAlterSQL):
         category = OperationCategory.ADDITION
 
     def describe(self):
-        return 'Create SQL "{name}"'.format(name=self.name)
+        return f'Create SQL "{self.name}"'
 
     def deconstruct(self):
         name, args, kwargs = super(CreateSQL, self).deconstruct()
-        kwargs['name'] = self.name
+        kwargs["name"] = self.name
         if self.dependencies:
-            kwargs['dependencies'] = self.dependencies
+            kwargs["dependencies"] = self.dependencies
         return (name, args, kwargs)
 
-    def __init__(self, name, sql, reverse_sql=None, state_operations=None, hints=None,
-                 dependencies=None):
-        super(CreateSQL, self).__init__(name, sql, reverse_sql=reverse_sql,
-                                        state_operations=state_operations, hints=hints)
+    def __init__(
+        self,
+        name,
+        sql,
+        reverse_sql=None,
+        state_operations=None,
+        hints=None,
+        dependencies=None,
+    ):
+        super(CreateSQL, self).__init__(
+            name,
+            sql,
+            reverse_sql=reverse_sql,
+            state_operations=state_operations,
+            hints=hints,
+        )
         self.dependencies = dependencies or ()
 
     def state_forwards(self, app_label, state):
@@ -203,15 +230,13 @@ class CreateSQL(BaseAlterSQL):
 
 
 class DeleteSQL(BaseAlterSQL):
-    """
-    Deltes SQL item from database.
-    """
+    """Deletes SQL item from database."""
 
     if django.VERSION >= (5, 1):
         category = OperationCategory.REMOVAL
 
     def describe(self):
-        return 'Delete SQL "{name}"'.format(name=self.name)
+        return f'Delete SQL "{self.name}"'
 
     def state_forwards(self, app_label, state):
         super(DeleteSQL, self).state_forwards(app_label, state)

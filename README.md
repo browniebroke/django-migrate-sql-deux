@@ -98,9 +98,9 @@ after any other apps that redefine `makemigrations` command too.
 
 ## Usage
 
-1)  Create `sql_config.py` module to root of a target app you want to
+1.  Create `sql_config.py` module to root of a target app you want to
     manage custom SQL for.
-2)  Define SQL items in it (`sql_items`), for example:
+2.  Define SQL items in it (`sql_items`), for example:
 
 ```python
 # PostgreSQL example.
@@ -119,7 +119,7 @@ sql_items = [
 ]
 ```
 
-3)  Create migration `python manage.py makemigrations`:
+3.  Create migration `python manage.py makemigrations`:
 
         Migrations for 'app_name':
           0002_auto_xxxx.py:
@@ -145,7 +145,7 @@ class Migration(migrations.Migration):
     ]
 ```
 
-4)  Execute migration `python manage.py migrate`:
+4.  Execute migration `python manage.py migrate`:
 
         Operations to perform:
           Apply all migrations: app_name
@@ -164,7 +164,7 @@ Check result in `python manage.py dbshell`:
 Now, say, you want to change the function implementation so that it
 takes a custom type as argument:
 
-5)  Edit your `sql_config.py`:
+5.  Edit your `sql_config.py`:
 
 ```python
 # PostgreSQL example #2.
@@ -191,7 +191,7 @@ sql_items = [
 ]
 ```
 
-6)  Generate migration `python manage.py makemigrations`:
+6.  Generate migration `python manage.py makemigrations`:
 
 ```
 Migrations for 'app_name':
@@ -244,8 +244,7 @@ another version of it, so `DROP` makes it clean.
 definition, it will NOT drop + create it, but just rerun forward SQL,
 which is `CREATE OR REPLACE` in this example.**
 
-7)  Execute migration `python manage.py migrate`:
-
+7.  Execute migration `python manage.py migrate`:
 
 ```
 Operations to perform:
