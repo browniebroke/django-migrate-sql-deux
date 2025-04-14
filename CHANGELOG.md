@@ -2,6 +2,23 @@
 
 <!-- version list -->
 
+## v1.1.0 (2025-04-14)
+
+### Features
+
+- Backport some changes to makemigrations command from Django
+  ([`c1b4f13`](https://github.com/browniebroke/django-migrate-sql-deux/commit/c1b4f131ac53a2ce074b810f2aeac1653c89bada))
+
+- Extract core command into a mixin
+  ([`23cf182`](https://github.com/browniebroke/django-migrate-sql-deux/commit/23cf1823c99e1a21b54ac78e2c68782d3f4223a8))
+
+This should make it easier to integrate with other reusable apps that provide a `makemigrations`
+  command
+
+- Leverage newly added autodetector command attribute on Django 5.2
+  ([`733d74b`](https://github.com/browniebroke/django-migrate-sql-deux/commit/733d74b3feb8d9977aca0b9f61808f0d66a684aa))
+
+
 ## v1.0.1 (2025-04-14)
 
 ### Bug Fixes
