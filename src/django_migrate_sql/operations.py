@@ -139,6 +139,8 @@ class AlterSQL(BaseAlterSQL):
             name (str): Name of SQL item in current application to alter state for.
             sql (str/list): Forward SQL for item creation.
             reverse_sql (str/list): Backward SQL for reversing create operation.
+            state_operations (list): Operations to perform on state.
+            hints (dict): Hints for operation.
             state_reverse_sql (str/list): Backward SQL used to alter state of backward SQL
                 *instead* of `reverse_sql`. Used for operations generated for items with
                 `replace` = `True`.

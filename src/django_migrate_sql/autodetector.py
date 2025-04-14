@@ -40,10 +40,11 @@ def is_sql_equal(sqls1, sqls2):
     """
     Find out equality of two SQL items.
 
-    See https://docs.djangoproject.com/en/stable/ref/migration-operations/#runsql.
+    See https://docs.djangoproject.com/en/stable/ref/migration-operations/#runsql
 
     Args:
-        sqls1, sqls2: SQL items, have the same format as supported by Django's RunSQL operation.
+        sqls1: SQL item, has the same format as supported by Django's RunSQL operation.
+        sqls2: SQL item, has the same format as supported by Django's RunSQL operation.
 
     Returns:
         (bool) `True` if equal, otherwise `False`.
@@ -112,10 +113,10 @@ class MigrationAutodetector(DjangoMigrationAutodetector):
 
         Args:
             keys (list): List of migration keys, that are one of create/delete operations, and
-                dont require respective reverse operations.
+                don't require respective reverse operations.
             resolve_keys (list): List of migration keys, that are changing existing items,
                 and may require respective reverse operations.
-            sql_sate (graph.SQLStateGraph): State of SQL items.
+            sql_state (graph.SQLStateGraph): State of SQL items.
 
         Returns:
             (list) Sorted sequence of migration keys, enriched with dependencies.
