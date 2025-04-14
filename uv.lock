@@ -149,8 +149,7 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "psycopg2", version = "2.8.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "psycopg2", version = "2.9.10", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "psycopg2" },
     { name = "pytest" },
     { name = "pytest-cov" },
     { name = "pytest-django" },
@@ -161,7 +160,7 @@ requires-dist = [{ name = "django", specifier = ">=4.2" }]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "psycopg2", marker = "python_full_version < '3.11'", specifier = ">=2.6.1,<2.9" },
+    { name = "psycopg2", marker = "python_full_version < '3.11'", specifier = ">=2.9.10,<2.10" },
     { name = "psycopg2", marker = "python_full_version >= '3.11'", specifier = ">=2.9" },
     { name = "pytest", specifier = ">=8,<9" },
     { name = "pytest-cov", specifier = ">=6,<7" },
@@ -206,25 +205,8 @@ wheels = [
 
 [[package]]
 name = "psycopg2"
-version = "2.8.6"
-source = { registry = "https://pypi.org/simple" }
-resolution-markers = [
-    "python_full_version == '3.10.*'",
-    "python_full_version < '3.10'",
-]
-sdist = { url = "https://files.pythonhosted.org/packages/fd/ae/98cb7a0cbb1d748ee547b058b14604bd0e9bf285a8e0cc5d148f8a8a952e/psycopg2-2.8.6.tar.gz", hash = "sha256:fb23f6c71107c37fd667cb4ea363ddeb936b348bbd6449278eb92c189699f543", size = 383797 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/00/13/ce81fc492fb61f33e2dd247e638c4c8a2187c58864e61a04de8496429e6e/psycopg2-2.8.6-cp39-cp39-win32.whl", hash = "sha256:2c93d4d16933fea5bbacbe1aaf8fa8c1348740b2e50b3735d1b0bf8154cbf0f3", size = 1014021 },
-    { url = "https://files.pythonhosted.org/packages/d6/eb/ba556d3d642fedf220e2e7e4f16085d6f1f0363a1670fc4b72a26f497c5c/psycopg2-2.8.6-cp39-cp39-win_amd64.whl", hash = "sha256:d5062ae50b222da28253059880a871dc87e099c25cb68acf613d9d227413d6f7", size = 1150934 },
-]
-
-[[package]]
-name = "psycopg2"
 version = "2.9.10"
 source = { registry = "https://pypi.org/simple" }
-resolution-markers = [
-    "python_full_version >= '3.11'",
-]
 sdist = { url = "https://files.pythonhosted.org/packages/62/51/2007ea29e605957a17ac6357115d0c1a1b60c8c984951c19419b3474cdfd/psycopg2-2.9.10.tar.gz", hash = "sha256:12ec0b40b0273f95296233e8750441339298e6a572f7039da5b260e3c8b60e11", size = 385672 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/0a/a9/146b6bdc0d33539a359f5e134ee6dda9173fb8121c5b96af33fa299e50c4/psycopg2-2.9.10-cp310-cp310-win32.whl", hash = "sha256:5df2b672140f95adb453af93a7d669d7a7bf0a56bcd26f1502329166f4a61716", size = 1024527 },
