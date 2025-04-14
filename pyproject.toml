@@ -62,6 +62,8 @@ lint.select = [
   "RUF", # ruff specific
 ]
 lint.ignore = [
+  "D101", # Missing docstring in public class
+  "D102", # Missing docstring in public method
   "D200", # One line docstring should fit in one line
   "D203", # 1 blank line required before class docstring
   "D205", # 1 blank line required between summary and description
