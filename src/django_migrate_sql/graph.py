@@ -56,24 +56,20 @@ class SQLStateGraph:
         for child, parents in self.dependencies.items():
             if child not in self.nodes:
                 raise NodeNotFoundError(
-                    "App %s SQL item dependencies reference nonexistent child node %r"
-                    % (child[0], child),
+                    "App %s SQL item dependencies reference nonexistent child node %r" % (child[0], child),
                     child,
                 )
             for parent in parents:
                 if parent not in self.nodes:
                     raise NodeNotFoundError(
-                        "App %s SQL item dependencies reference nonexistent parent node %r"
-                        % (child[0], parent),
+                        "App %s SQL item dependencies reference nonexistent parent node %r" % (child[0], parent),
                         parent,
                     )
                 self.node_map[child].add_parent(self.node_map[parent])
                 self.node_map[parent].add_child(self.node_map[child])
 
         for node in self.nodes:
-            self.ensure_not_cyclic(
-                node, lambda x: (parent.key for parent in self.node_map[x].parents)
-            )
+            self.ensure_not_cyclic(node, lambda x: (parent.key for parent in self.node_map[x].parents))
 
     def ensure_not_cyclic(self, start, get_children):
         # Algo from GvR:
@@ -87,9 +83,7 @@ class SQLStateGraph:
                 for node in get_children(top):
                     if node in stack:
                         cycle = stack[stack.index(node) :]
-                        raise CircularDependencyError(
-                            ", ".join("%s.%s" % n for n in cycle)
-                        )
+                        raise CircularDependencyError(", ".join("%s.%s" % n for n in cycle))
                     if node in todo:
                         stack.append(node)
                         todo.remove(node)
@@ -109,9 +103,7 @@ def build_current_graph():
     graph = SQLStateGraph()
     for app_name, config in apps.app_configs.items():
         try:
-            module = import_module(
-                ".".join((config.module.__name__, SQL_CONFIG_MODULE))
-            )
+            module = import_module(".".join((config.module.__name__, SQL_CONFIG_MODULE)))
             sql_items = module.sql_items
         except (ImportError, AttributeError):
             continue
