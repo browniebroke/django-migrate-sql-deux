@@ -25,11 +25,15 @@ from ...graph import build_current_graph
 
 if django.VERSION >= (5, 2):
 
-    class Command(MakeMigrationsCommand):
+    class DjangoMigrateSQLMixin:
+        """Mixin for makemigration command to attach a custom auto-detector."""
+
         autodetector = MigrationAutodetector
 else:
 
-    class Command(MakeMigrationsCommand):
+    class DjangoMigrateSQLMixin:
+        """Mixin for makemigration command to attach a custom auto-detector."""
+
         @no_translations
         def handle(self, *app_labels, **options):
             self.written_files = []
@@ -183,3 +187,7 @@ else:
                     self.write_migration_files(changes)
                 if check_changes:
                     sys.exit(1)
+
+
+class Command(DjangoMigrateSQLMixin, MakeMigrationsCommand):
+    """Custom makemigration command using a custom auto-detector."""
