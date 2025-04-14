@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.db import models
 
 
@@ -10,4 +8,4 @@ class Book(models.Model):
     published = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return "Book [{}]".format(self.name)
+        return f"Book [{self.name}]"
