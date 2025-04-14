@@ -50,7 +50,7 @@ class Command(MakeMigrationsCommand):
                 bad_app_labels.add(app_label)
         if bad_app_labels:
             for app_label in bad_app_labels:
-                self.stderr.write("App '%s' could not be found. Is it in INSTALLED_APPS?" % app_label)
+                self.stderr.write(f"App '{app_label}' could not be found. Is it in INSTALLED_APPS?")
             sys.exit(2)
 
         # Load the current graph state. Pass in None for the connection so
@@ -66,10 +66,10 @@ class Command(MakeMigrationsCommand):
             conflicts = {app_label: conflict for app_label, conflict in conflicts.items() if app_label in app_labels}
 
         if conflicts and not self.merge:
-            name_str = "; ".join("%s in %s" % (", ".join(names), app) for app, names in conflicts.items())
+            name_str = "; ".join("{} in {}".format(", ".join(names), app) for app, names in conflicts.items())
             raise CommandError(
-                "Conflicting migrations detected (%s).\nTo fix them run "
-                "'python manage.py makemigrations --merge'" % name_str
+                f"Conflicting migrations detected ({name_str}).\nTo fix them run "
+                "'python manage.py makemigrations --merge'"
             )
 
         # If they want to merge and there's nothing to merge, then politely exit
@@ -121,9 +121,9 @@ class Command(MakeMigrationsCommand):
             # No changes? Tell them.
             if self.verbosity >= 1:
                 if len(app_labels) == 1:
-                    self.stdout.write("No changes detected in app '%s'" % app_labels.pop())
+                    self.stdout.write(f"No changes detected in app '{app_labels.pop()}'")
                 elif len(app_labels) > 1:
-                    self.stdout.write("No changes detected in apps '%s'" % ("', '".join(app_labels)))
+                    self.stdout.write("No changes detected in apps '{}'".format("', '".join(app_labels)))
                 else:
                     self.stdout.write("No changes detected")
 

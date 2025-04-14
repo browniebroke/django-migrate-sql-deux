@@ -41,7 +41,7 @@ def module_dir(module):
         filename = getattr(module, "__file__", None)
         if filename is not None:
             return os.path.dirname(filename)
-    raise ValueError("Cannot determine directory containing %s" % module)
+    raise ValueError(f"Cannot determine directory containing {module}")
 
 
 def item(name, version, dependencies=None):
@@ -232,7 +232,7 @@ class MigrateSQLTestCase(BaseMigrateSQLTestCase):
     )
 
     def setUp(self):
-        super(MigrateSQLTestCase, self).setUp()
+        super().setUp()
         books = (
             Book(name="Clone Wars", author="John Ben", rating=4, published=True),
             Book(name="The mysterious dog", author="John Ben", rating=6, published=True),
