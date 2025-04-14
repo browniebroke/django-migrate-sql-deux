@@ -2,6 +2,19 @@
 
 <!-- version list -->
 
+## v1.0.1 (2025-04-14)
+
+### Bug Fixes
+
+- Run Ruff with unsafe fixes
+  ([`45a85b2`](https://github.com/browniebroke/django-migrate-sql-deux/commit/45a85b253ba92f9da37645177b5668f908261fa2))
+
+### Testing
+
+- Tidy up and simplify test settings
+  ([`affbd00`](https://github.com/browniebroke/django-migrate-sql-deux/commit/affbd00ae82cf90d2d46d9a75e9fa8f9c157caa8))
+
+
 ## v1.0.0 (2025-04-14)
 
 ### Bug Fixes
