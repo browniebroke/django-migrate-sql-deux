@@ -331,6 +331,6 @@ class MigrationAutodetector(DjangoMigrationAutodetector):
             )
         else:
             return (
-                (resolved_app_label, resolved_object_name.lower()) + dependency[2:],
+                (resolved_app_label, resolved_object_name.lower(), *dependency[2:]),
                 True,
             )
