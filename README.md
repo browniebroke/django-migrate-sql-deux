@@ -93,9 +93,9 @@ Again, you should make sure that the app where your custom command is implemente
 
 #### Django 5.2+
 
-If you're running Django 5.2 or newer, you should also do something similar for the `migrate` command. Django 5.2 introduces a new system check to make sure both commands use the same autodetector class.
+If you're running Django 5.2 or newer, you should also do something similar for the `migrate` command. Django 5.2 introduces a system check to make sure both commands use the same `autodetector` class.
 
-If you run another app providing a custom autodetector class, you'll have to combine it with the autodetector from this package.
+If you run another app providing a custom `autodetector` class, you'll need to combine it with the `autodetector` from this package.
 
 ```python
 # app1/management/commands/_autodetector.py
