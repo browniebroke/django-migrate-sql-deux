@@ -102,7 +102,6 @@ branch = true
 parallel = true
 source = [
   "django_migrate_sql",
-  "tests",
 ]
 
 [tool.coverage.paths]
