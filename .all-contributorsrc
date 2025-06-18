@@ -20,8 +20,19 @@
         "ideas",
         "doc"
       ]
+    },
+    {
+      "login": "BrutCZE",
+      "name": "Michal Byrtus",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34546098?v=4",
+      "profile": "https://github.com/BrutCZE",
+      "contributions": [
+        "bug",
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "skipCi": true
+  "skipCi": true,
+  "commitType": "docs"
 }
