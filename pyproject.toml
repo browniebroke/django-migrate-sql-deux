@@ -43,8 +43,8 @@ dev = [
   "psycopg2>=2.9.10,<2.10;python_version<'3.11'",
   "psycopg2>=2.9;python_version>='3.11'",
   "pytest>=8,<9",
-  "pytest-cov>=6,<7",
   "pytest-django>=4.5,<5",
+  "coverage",
 ]
 
 [tool.ruff]
@@ -93,15 +93,13 @@ lint.isort.known-first-party = [ "django_migrate_sql", "tests" ]
 addopts = """\
     -v
     -Wdefault
-    --cov=django_migrate_sql
-    --cov-report=term
-    --cov-report=xml
     --ds=tests.settings
     """
 pythonpath = [ "src" ]
 
 [tool.coverage.run]
 branch = true
+parallel = true
 
 [tool.coverage.report]
 exclude_lines = [
