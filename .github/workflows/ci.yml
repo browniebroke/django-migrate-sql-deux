@@ -52,6 +52,8 @@ jobs:
         shell: bash
       - run: tox -f py$(echo ${{ matrix.python-version }} | tr -d .)
         shell: bash
+      - run: python -m coverage combine
+        shell: bash
       - uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
