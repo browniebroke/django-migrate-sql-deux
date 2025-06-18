@@ -2,6 +2,20 @@
 
 <!-- version list -->
 
+## v1.1.1 (2025-06-18)
+
+### Bug Fixes
+
+- Add `migrate` command to pass system checks on Django 5.2
+  ([#59](https://github.com/browniebroke/django-migrate-sql-deux/pull/59),
+  [`b2eb676`](https://github.com/browniebroke/django-migrate-sql-deux/commit/b2eb6769382b26b711ceedf0d49e46193d0bf231))
+
+### Refactoring
+
+- Use iterable unpacking instead of concatenation
+  ([`475ec6d`](https://github.com/browniebroke/django-migrate-sql-deux/commit/475ec6d2ab9e6a949e4506a20f677d0affe2860e))
+
+
 ## v1.1.0 (2025-04-14)
 
 ### Features
