@@ -91,6 +91,50 @@ class Command(DjangoMigrateSQLMixin, LinearMigrationsMakeMigrationsCommand):
 
 Again, you should make sure that the app where your custom command is implemented is placed above all the other apps.
 
+#### Django 5.2+
+
+If you're running Django 5.2 or newer, you should also do something similar for the `migrate` command. Django 5.2 introduces a system check to make sure both commands use the same `autodetector` class.
+
+If you run another app providing a custom `autodetector` class, you'll need to combine it with the `autodetector` from this package.
+
+```python
+# app1/management/commands/_autodetector.py
+from django_migrate_sql.autodetector import MigrationAutodetector as MigrateSQLMigrationAutodetector
+from other_app.autodetector import MigrationAutodetector as OtherAppMigrationAutodetector
+
+
+class MigrationAutodetector(MigrateSQLMigrationAutodetector, OtherAppMigrationAutodetector):
+    pass
+
+
+# app1/management/commands/makemigrations.py
+# Assuming "other_app" provides a custom makemigrations command,
+# this file is not needed if not
+from other_app.management.commands.makemigrations import (
+    Command as MakeMigrationsCommand,
+)
+from ._autodetector import MigrationAutodetector
+
+
+class Command(MakeMigrationsCommand):
+    autodetector = MigrationAutodetector
+
+
+# app1/management/commands/migrate.py
+# Assuming "other_app" provides a custom makemigrations command,
+# this file is not needed if not
+from other_app.management.commands.migrate import (
+    Command as MigrateCommand,
+)
+from ._autodetector import MigrationAutodetector
+
+
+class Command(MigrateCommand):
+    autodetector = MigrationAutodetector
+```
+
+Note that
+
 ## Usage
 
 ### Basic example
