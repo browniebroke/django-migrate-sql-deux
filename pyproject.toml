@@ -4,7 +4,7 @@ requires = [ "setuptools>=77.0.3" ]
 
 [project]
 name = "django-migrate-sql-deux"
-version = "1.1.1"
+version = "1.1.2"
 description = "Django Migrations for raw SQL"
 readme = "README.md"
 license = "ISC"

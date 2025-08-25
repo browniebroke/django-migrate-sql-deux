@@ -2,6 +2,21 @@
 
 <!-- version list -->
 
+## v1.1.2 (2025-08-25)
+
+### Bug Fixes
+
+- Use SPDX expression for license
+  ([#96](https://github.com/browniebroke/django-migrate-sql-deux/pull/96),
+  [`02105fc`](https://github.com/browniebroke/django-migrate-sql-deux/commit/02105fc89c695eb3689f20f503d954cda280db77))
+
+### Documentation
+
+- Add BrutCZE as a contributor for bug, and ideas
+  ([#61](https://github.com/browniebroke/django-migrate-sql-deux/pull/61),
+  [`ffc11bd`](https://github.com/browniebroke/django-migrate-sql-deux/commit/ffc11bd6c079b363e7b64422838a9237a1f2880c))
+
+
 ## v1.1.1 (2025-06-18)
 
 ### Bug Fixes
