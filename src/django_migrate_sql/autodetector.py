@@ -61,7 +61,7 @@ def is_sql_equal(sqls1, sqls2):
     if len(sqls1) != len(sqls2):
         return False
 
-    for sql1, sql2 in zip(sqls1, sqls2):
+    for sql1, sql2 in zip(sqls1, sqls2, strict=False):
         sql1, params1 = _sql_params(sql1)
         sql2, params2 = _sql_params(sql2)
         if sql1 != sql2 or params1 != params2:
