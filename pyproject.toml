@@ -89,6 +89,9 @@ lint.per-file-ignores."tests/**/migrations*/*" = [
 ]
 lint.isort.known-first-party = [ "django_migrate_sql", "tests" ]
 
+[tool.pyproject-fmt]
+max_supported_python = "3.14"
+
 [tool.pytest.ini_options]
 addopts = """\
     -v
