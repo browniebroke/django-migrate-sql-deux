@@ -2,6 +2,15 @@
 
 <!-- version list -->
 
+## v1.3.0 (2025-10-08)
+
+### Features
+
+- Apply `textwrap.dedent()` to SQL strings automatically
+  ([#129](https://github.com/browniebroke/django-migrate-sql-deux/pull/129),
+  [`eb58cd7`](https://github.com/browniebroke/django-migrate-sql-deux/commit/eb58cd74cf737389aa289f65dde2e86ee61fc729))
+
+
 ## v1.2.0 (2025-09-18)
 
 ### Features
