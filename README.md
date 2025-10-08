@@ -151,9 +151,13 @@ Note that
    sql_items = [
        SQLItem(
            'make_sum',   # name of the item
-           'create or replace function make_sum(a int, b int) returns int as $$ '
-           'begin return a + b; end; '
-           '$$ language plpgsql;',  # forward sql
+           """
+           create or replace function make_sum(a int, b int) returns int as $$
+             begin
+               return a + b;
+             end;
+           $$ language plpgsql;
+           """,  # forward sql
            reverse_sql='drop function make_sum(int, int);',  # sql for removal
        ),
    ]
@@ -222,9 +226,13 @@ Now, say, you want to change the function implementation so that it takes a cust
    sql_items = [
        SQLItem(
            "make_sum",  # name of the item
-           "create or replace function make_sum(a mynum, b mynum) returns mynum as $$ "
-           "begin return (a.num + b.num, 'result')::mynum; end;"
-           "$$ language plpgsql;",  # forward sql
+           """
+           create or replace function make_sum(a mynum, b mynum) returns mynum as $$
+             begin
+               return (a.num + b.num, 'result')::mynum;
+             end;
+           $$ language plpgsql;
+           """,  # forward sql
            reverse_sql="drop function make_sum(mynum, mynum);",  # sql for removal
            # depends on `mynum` since takes it as argument. we won't be able to drop function
            # without dropping `mynum` first.

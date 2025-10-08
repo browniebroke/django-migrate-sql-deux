@@ -1,3 +1,6 @@
+import textwrap
+
+
 class SQLItem:
     """
     Represents any SQL entity (unit), for example function, type, index or trigger.
@@ -21,7 +24,27 @@ class SQLItem:
 
         """
         self.name = name
-        self.sql = sql
-        self.reverse_sql = reverse_sql
+        self.sql = self._process_sql(sql)
+        self.reverse_sql = self._process_sql(reverse_sql) if reverse_sql is not None else None
         self.dependencies = dependencies or []
         self.replace = replace
+
+    def _process_sql(self, sql):
+        """
+        Process SQL by applying textwrap.dedent() to strings.
+
+        Args:
+            sql (str/tuple/list): SQL string or tuple/list of (sql, params).
+
+        Returns:
+            Processed SQL in the same format as input.
+
+        """
+        if isinstance(sql, str):
+            return textwrap.dedent(sql)
+        elif isinstance(sql, (tuple, list)):
+            return [
+                (textwrap.dedent(item[0]), item[1]) if isinstance(item, (tuple, list)) else textwrap.dedent(item)
+                for item in sql
+            ]
+        return sql
