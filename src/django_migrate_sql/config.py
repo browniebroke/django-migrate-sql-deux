@@ -25,7 +25,7 @@ class SQLItem:
         """
         self.name = name
         self.sql = self._process_sql(sql)
-        self.reverse_sql = self._process_sql(reverse_sql) if reverse_sql is not None else None
+        self.reverse_sql = self._process_sql(reverse_sql)
         self.dependencies = dependencies or []
         self.replace = replace
 
@@ -44,7 +44,11 @@ class SQLItem:
             return textwrap.dedent(sql)
         if isinstance(sql, (tuple, list)):
             return [
-                (textwrap.dedent(item[0]), item[1]) if isinstance(item, (tuple, list)) else textwrap.dedent(item)
+                (textwrap.dedent(item[0]), item[1])
+                if isinstance(item, (tuple, list))
+                else textwrap.dedent(item)
+                if isinstance(item, str)
+                else item
                 for item in sql
             ]
         return sql

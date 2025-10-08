@@ -147,3 +147,41 @@ def test_dedent_with_none_sql():
         123,
     )
     assert item.sql == 123
+
+
+def test_dedent_with_list_containing_none():
+    """Test that None in a list is returned as-is without error."""
+    # Test list with None - should be returned unchanged
+    item = SQLItem(
+        "test_func",
+        [None],
+    )
+    assert isinstance(item.sql, list)
+    assert len(item.sql) == 1
+    assert item.sql[0] is None
+
+    # Test mixed list with string, tuple, and None
+    item2 = SQLItem(
+        "test_func2",
+        [
+            """
+            CREATE FUNCTION test() RETURNS int AS $$
+              BEGIN RETURN 1; END;
+            $$ LANGUAGE plpgsql;
+            """,
+            (
+                """
+                CREATE FUNCTION test2() RETURNS int AS $$
+                  BEGIN RETURN 2; END;
+                $$ LANGUAGE plpgsql;
+                """,
+                [],
+            ),
+            None,
+        ],
+    )
+    assert isinstance(item2.sql, list)
+    assert len(item2.sql) == 3
+    assert item2.sql[0].startswith("\nCREATE FUNCTION test()")
+    assert isinstance(item2.sql[1], tuple)
+    assert item2.sql[2] is None
