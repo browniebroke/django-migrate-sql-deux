@@ -42,7 +42,7 @@ class SQLItem:
         """
         if isinstance(sql, str):
             return textwrap.dedent(sql)
-        elif isinstance(sql, (tuple, list)):
+        if isinstance(sql, (tuple, list)):
             return [
                 (textwrap.dedent(item[0]), item[1]) if isinstance(item, (tuple, list)) else textwrap.dedent(item)
                 for item in sql
