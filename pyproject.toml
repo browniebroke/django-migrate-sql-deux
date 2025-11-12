@@ -42,7 +42,7 @@ urls.repository = "https://github.com/browniebroke/django-migrate-sql-deux"
 dev = [
   "psycopg2>=2.9.10,<2.10;python_version<'3.11'",
   "psycopg2>=2.9;python_version>='3.11'",
-  "pytest>=8,<9",
+  "pytest>=9,<10",
   "pytest-django>=4.5,<5",
   "coverage",
 ]
