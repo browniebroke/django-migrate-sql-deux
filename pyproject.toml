@@ -46,6 +46,7 @@ dev = [
   "pytest>=9,<10",
   "pytest-django>=4.5,<5",
   "coverage",
+  "ty==0.0.31",
 ]
 django60 = [ "django>=6.0a1,<6.1; python_version>='3.12'" ]
 django52 = [ "django>=5.2a1,<6" ]
@@ -139,23 +140,8 @@ exclude_lines = [
   'if __name__ == "__main__":',
 ]
 
-[tool.mypy]
-check_untyped_defs = true
-disallow_any_generics = true
-disallow_incomplete_defs = true
-disallow_untyped_defs = true
-mypy_path = "src/"
-no_implicit_optional = true
-show_error_codes = true
-warn_unreachable = true
-warn_unused_ignores = true
-exclude = [
-  'setup.py',
-]
-
-[[tool.mypy.overrides]]
-module = "tests.*"
-allow_untyped_defs = true
+[tool.ty]
+terminal.error-on-warning = true
 
 [tool.semantic_release]
 version_toml = [ "pyproject.toml:project.version" ]
