@@ -199,7 +199,7 @@ wheels = [
 
 [[package]]
 name = "django-migrate-sql-deux"
-version = "1.4.0"
+version = "2.0.0"
 source = { editable = "." }
 dependencies = [
     { name = "django", version = "5.2.16", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12' or extra == 'group-23-django-migrate-sql-deux-django52' or (extra == 'group-23-django-migrate-sql-deux-django60' and extra == 'group-23-django-migrate-sql-deux-django61')" },

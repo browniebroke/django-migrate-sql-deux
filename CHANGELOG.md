@@ -2,6 +2,18 @@
 
 <!-- version list -->
 
+## v2.0.0 (2026-07-26)
+
+### Features
+
+- Add Django 6.1 support ([#350](https://github.com/browniebroke/django-migrate-sql-deux/pull/350),
+  [`509cf03`](https://github.com/browniebroke/django-migrate-sql-deux/commit/509cf03b9232a2d8afd318650550fe32cfce9a2f))
+
+- Drop Django < 5.2 support
+  ([#349](https://github.com/browniebroke/django-migrate-sql-deux/pull/349),
+  [`71b1d27`](https://github.com/browniebroke/django-migrate-sql-deux/commit/71b1d27fd1e12295758abaaefeb523f8c4c2b853))
+
+
 ## v1.4.0 (2025-12-07)
 
 ### Features
