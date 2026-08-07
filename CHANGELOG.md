@@ -2,6 +2,15 @@
 
 <!-- version list -->
 
+## v2.1.0 (2026-08-07)
+
+### Features
+
+- Add support for Python 3.15
+  ([#363](https://github.com/browniebroke/django-migrate-sql-deux/pull/363),
+  [`fd8ac4f`](https://github.com/browniebroke/django-migrate-sql-deux/commit/fd8ac4fdff91fd3c6c83c3c9ce130c2aa10d31b4))
+
+
 ## v2.0.0 (2026-07-26)
 
 ### Features
