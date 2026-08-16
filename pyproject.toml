@@ -40,6 +40,8 @@ urls.repository = "https://github.com/browniebroke/django-migrate-sql-deux"
 
 [dependency-groups]
 dev = [
+  "django-stubs>=6.0.9",
+  "mypy>=2.3",
   "psycopg2>=2.9.10,<2.10;python_version<'3.11'",
   "psycopg2>=2.9;python_version>='3.11'",
   "pytest>=9,<10",
@@ -135,6 +137,7 @@ exclude_lines = [
 ]
 
 [tool.mypy]
+plugins = [ "mypy_django_plugin.main" ]
 check_untyped_defs = true
 disallow_any_generics = true
 disallow_incomplete_defs = true
