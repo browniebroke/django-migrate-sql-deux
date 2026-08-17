@@ -137,7 +137,6 @@ exclude_lines = [
 ]
 
 [tool.mypy]
-plugins = [ "mypy_django_plugin.main" ]
 check_untyped_defs = true
 disallow_any_generics = true
 disallow_incomplete_defs = true
@@ -147,13 +146,11 @@ no_implicit_optional = true
 show_error_codes = true
 warn_unreachable = true
 warn_unused_ignores = true
-exclude = [
-  'setup.py',
-]
+plugins = [ "mypy_django_plugin.main" ]
+overrides = [ { module = "tests.*", allow_untyped_defs = true }, { module = "docs.*", ignore_errors = true } ]
 
-[[tool.mypy.overrides]]
-module = "tests.*"
-allow_untyped_defs = true
+[tool.django-stubs]
+django_settings_module = "tests.settings"
 
 [tool.semantic_release]
 version_toml = [ "pyproject.toml:project.version" ]
