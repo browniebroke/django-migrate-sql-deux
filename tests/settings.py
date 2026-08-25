@@ -2,7 +2,7 @@ SECRET_KEY = "NOTASECRET"  # noqa S105
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": "migrate_sql_test_db",
         "USER": "postgres",
         "PASSWORD": "postgres",
