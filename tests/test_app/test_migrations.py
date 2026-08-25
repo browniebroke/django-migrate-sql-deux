@@ -12,18 +12,16 @@ from django.db import connection
 from django.db.migrations.loader import MigrationLoader
 from django.test import TestCase
 from django.test.utils import extend_sys_path
-from psycopg2.extras import CompositeCaster, register_composite
+from psycopg.types.composite import CompositeInfo, register_composite
 
 from django_migrate_sql.config import SQLItem
 
 from .models import Book
 
 
-class TupleComposite(CompositeCaster):
+def tuple_factory(*values):
     """Loads composite type object as tuple."""
-
-    def make(self, values):
-        return tuple(values)
+    return values
 
 
 def module_dir(module):
@@ -366,7 +364,7 @@ class SQLDependenciesTestCase(BaseMigrateSQLTestCase):
     # Key = name of migration (app, name), value is a list of :
     # * SQL arguments passed to Postgre's ROW
     # * composite type to cast ROW built above into.
-    # * dependency types (included into psycopg2 `register_composite`)
+    # * dependency types (included into psycopg `register_composite`)
     # * expected result after fetching built ROW from database.
     RESULTS_EXPECTED = {  # noqa: RUF012
         ("test_app", "0004"): [
@@ -419,7 +417,8 @@ class SQLDependenciesTestCase(BaseMigrateSQLTestCase):
         cursor = connection.cursor()
         if repr_sql:
             for _type in known_types:
-                register_composite(str(_type), cursor.cursor, factory=TupleComposite)
+                info = CompositeInfo.fetch(connection.connection, str(_type))
+                register_composite(info, cursor.cursor, factory=tuple_factory)
 
             sql = f"SELECT ROW{repr_sql}::{fetch_type}"
             cursor.execute(sql)
