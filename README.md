@@ -70,7 +70,7 @@ Add `django_migrate_sql` to `INSTALLED_APPS`:
 ```python
 INSTALLED_APPS = [
     # ...
-    'django_migrate_sql',
+    "django_migrate_sql",
 ]
 ```
 
@@ -82,8 +82,11 @@ If you want functionality from multiple `makemigrations` commands provided by ot
 
 ```python
 # app1/management/commands/makemigrations.py
-from django_linear_migrations.management.commands.makemigrations import Command as LinearMigrationsMakeMigrationsCommand
+from django_linear_migrations.management.commands.makemigrations import (
+    Command as LinearMigrationsMakeMigrationsCommand,
+)
 from django_migrate_sql.management.commands.makemigrations import DjangoMigrateSQLMixin
+
 
 class Command(DjangoMigrateSQLMixin, LinearMigrationsMakeMigrationsCommand):
     pass
@@ -150,7 +153,7 @@ Note that
 
    sql_items = [
        SQLItem(
-           'make_sum',   # name of the item
+           "make_sum",  # name of the item
            """
            create or replace function make_sum(a int, b int) returns int as $$
              begin
@@ -158,7 +161,7 @@ Note that
              end;
            $$ language plpgsql;
            """,  # forward sql
-           reverse_sql='drop function make_sum(int, int);',  # sql for removal
+           reverse_sql="drop function make_sum(int, int);",  # sql for removal
        ),
    ]
    ```
@@ -180,13 +183,13 @@ Note that
 
    class Migration(migrations.Migration):
        dependencies = [
-           ('app_name', '0001_initial'),
+           ("app_name", "0001_initial"),
        ]
        operations = [
            django_migrate_sql.operations.CreateSQL(
-               name='make_sum',
-               sql='create or replace function make_sum(a int, b int) returns int as $$ begin return a + b; end; $$ language plpgsql;',
-               reverse_sql='drop function make_sum(int, int);',
+               name="make_sum",
+               sql="create or replace function make_sum(a int, b int) returns int as $$ begin return a + b; end; $$ language plpgsql;",
+               reverse_sql="drop function make_sum(int, int);",
            ),
        ]
    ```
@@ -266,27 +269,27 @@ Now, say, you want to change the function implementation so that it takes a cust
 
    class Migration(migrations.Migration):
        dependencies = [
-           ('app_name', '0002_xxxx'),
+           ("app_name", "0002_xxxx"),
        ]
        operations = [
            django_migrate_sql.operations.ReverseAlterSQL(
-               name='make_sum',
-               sql='drop function make_sum(int, int);',
-               reverse_sql='create or replace function make_sum(a int, b int) returns int as $$ begin return a + b; end; $$ language plpgsql;',
+               name="make_sum",
+               sql="drop function make_sum(int, int);",
+               reverse_sql="create or replace function make_sum(a int, b int) returns int as $$ begin return a + b; end; $$ language plpgsql;",
            ),
            django_migrate_sql.operations.CreateSQL(
-               name='mynum',
-               sql='create type mynum as (num int, name varchar(20));',
-               reverse_sql='drop type mynum;',
+               name="mynum",
+               sql="create type mynum as (num int, name varchar(20));",
+               reverse_sql="drop type mynum;",
            ),
            django_migrate_sql.operations.AlterSQL(
-               name='make_sum',
-               sql='create or replace function make_sum(a mynum, b mynum) returns mynum as $$ begin return (a.num + b.num, \'result\')::mynum; end; $$ language plpgsql;',
-               reverse_sql='drop function make_sum(mynum, mynum);',
+               name="make_sum",
+               sql="create or replace function make_sum(a mynum, b mynum) returns mynum as $$ begin return (a.num + b.num, 'result')::mynum; end; $$ language plpgsql;",
+               reverse_sql="drop function make_sum(mynum, mynum);",
            ),
            django_migrate_sql.operations.AlterSQLState(
-               name='make_sum',
-               add_dependencies=[('app_name', 'mynum')],
+               name="make_sum",
+               add_dependencies=[("app_name", "mynum")],
            ),
        ]
    ```
