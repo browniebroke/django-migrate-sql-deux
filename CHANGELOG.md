@@ -2,6 +2,20 @@
 
 <!-- version list -->
 
+## v3.0.0 (2026-11-07)
+
+### Features
+
+- Drop support for Python 3.10
+  ([#408](https://github.com/browniebroke/django-migrate-sql-deux/pull/408),
+  [`4b466e5`](https://github.com/browniebroke/django-migrate-sql-deux/commit/4b466e58495e7c43606c7f9dfc0b43c7db4605f4))
+
+### Testing
+
+- Run tests using psycopg ([#376](https://github.com/browniebroke/django-migrate-sql-deux/pull/376),
+  [`31c66ef`](https://github.com/browniebroke/django-migrate-sql-deux/commit/31c66efc13ce26d9d319a7292ba875aeb33328c9))
+
+
 ## v2.1.0 (2026-08-07)
 
 ### Features

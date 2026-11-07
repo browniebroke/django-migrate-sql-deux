@@ -3,15 +3,15 @@ revision = 5
 requires-python = ">=3.11"
 resolution-markers = [
     "python_full_version >= '3.15' and extra != 'group-23-django-migrate-sql-deux-django52' and extra != 'group-23-django-migrate-sql-deux-django60' and extra == 'group-23-django-migrate-sql-deux-django61'",
-    "python_full_version >= '3.12' and python_full_version < '3.15' and extra != 'group-23-django-migrate-sql-deux-django52' and extra != 'group-23-django-migrate-sql-deux-django60' and extra == 'group-23-django-migrate-sql-deux-django61'",
-    "python_full_version < '3.12' and extra != 'group-23-django-migrate-sql-deux-django52' and extra != 'group-23-django-migrate-sql-deux-django60' and extra == 'group-23-django-migrate-sql-deux-django61'",
     "python_full_version >= '3.15' and extra != 'group-23-django-migrate-sql-deux-django52' and extra == 'group-23-django-migrate-sql-deux-django60' and extra != 'group-23-django-migrate-sql-deux-django61'",
-    "python_full_version >= '3.12' and python_full_version < '3.15' and extra != 'group-23-django-migrate-sql-deux-django52' and extra == 'group-23-django-migrate-sql-deux-django60' and extra != 'group-23-django-migrate-sql-deux-django61'",
-    "python_full_version < '3.12' and extra != 'group-23-django-migrate-sql-deux-django52' and extra == 'group-23-django-migrate-sql-deux-django60' and extra != 'group-23-django-migrate-sql-deux-django61'",
     "python_full_version >= '3.15' and extra == 'group-23-django-migrate-sql-deux-django52' and extra != 'group-23-django-migrate-sql-deux-django60' and extra != 'group-23-django-migrate-sql-deux-django61'",
-    "python_full_version < '3.15' and extra == 'group-23-django-migrate-sql-deux-django52' and extra != 'group-23-django-migrate-sql-deux-django60' and extra != 'group-23-django-migrate-sql-deux-django61'",
     "python_full_version >= '3.15' and extra != 'group-23-django-migrate-sql-deux-django52' and extra != 'group-23-django-migrate-sql-deux-django60' and extra != 'group-23-django-migrate-sql-deux-django61'",
+    "python_full_version >= '3.12' and python_full_version < '3.15' and extra != 'group-23-django-migrate-sql-deux-django52' and extra != 'group-23-django-migrate-sql-deux-django60' and extra == 'group-23-django-migrate-sql-deux-django61'",
+    "python_full_version >= '3.12' and python_full_version < '3.15' and extra != 'group-23-django-migrate-sql-deux-django52' and extra == 'group-23-django-migrate-sql-deux-django60' and extra != 'group-23-django-migrate-sql-deux-django61'",
     "python_full_version >= '3.12' and python_full_version < '3.15' and extra != 'group-23-django-migrate-sql-deux-django52' and extra != 'group-23-django-migrate-sql-deux-django60' and extra != 'group-23-django-migrate-sql-deux-django61'",
+    "python_full_version < '3.12' and extra != 'group-23-django-migrate-sql-deux-django52' and extra != 'group-23-django-migrate-sql-deux-django60' and extra == 'group-23-django-migrate-sql-deux-django61'",
+    "python_full_version < '3.12' and extra != 'group-23-django-migrate-sql-deux-django52' and extra == 'group-23-django-migrate-sql-deux-django60' and extra != 'group-23-django-migrate-sql-deux-django61'",
+    "python_full_version < '3.15' and extra == 'group-23-django-migrate-sql-deux-django52' and extra != 'group-23-django-migrate-sql-deux-django60' and extra != 'group-23-django-migrate-sql-deux-django61'",
     "python_full_version < '3.12' and extra != 'group-23-django-migrate-sql-deux-django52' and extra != 'group-23-django-migrate-sql-deux-django60' and extra != 'group-23-django-migrate-sql-deux-django61'",
 ]
 conflicts = [[
@@ -233,9 +233,9 @@ name = "django"
 version = "5.2.18"
 source = { registry = "https://pypi.org/simple" }
 resolution-markers = [
+    "python_full_version >= '3.15' and extra == 'group-23-django-migrate-sql-deux-django52' and extra != 'group-23-django-migrate-sql-deux-django60' and extra != 'group-23-django-migrate-sql-deux-django61'",
     "python_full_version < '3.12' and extra != 'group-23-django-migrate-sql-deux-django52' and extra != 'group-23-django-migrate-sql-deux-django60' and extra == 'group-23-django-migrate-sql-deux-django61'",
     "python_full_version < '3.12' and extra != 'group-23-django-migrate-sql-deux-django52' and extra == 'group-23-django-migrate-sql-deux-django60' and extra != 'group-23-django-migrate-sql-deux-django61'",
-    "python_full_version >= '3.15' and extra == 'group-23-django-migrate-sql-deux-django52' and extra != 'group-23-django-migrate-sql-deux-django60' and extra != 'group-23-django-migrate-sql-deux-django61'",
     "python_full_version < '3.15' and extra == 'group-23-django-migrate-sql-deux-django52' and extra != 'group-23-django-migrate-sql-deux-django60' and extra != 'group-23-django-migrate-sql-deux-django61'",
     "python_full_version < '3.12' and extra != 'group-23-django-migrate-sql-deux-django52' and extra != 'group-23-django-migrate-sql-deux-django60' and extra != 'group-23-django-migrate-sql-deux-django61'",
 ]
@@ -287,7 +287,7 @@ wheels = [
 
 [[package]]
 name = "django-migrate-sql-deux"
-version = "2.1.0"
+version = "3.0.0"
 source = { editable = "." }
 dependencies = [
     { name = "django", version = "5.2.18", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12' or extra == 'group-23-django-migrate-sql-deux-django52' or (extra == 'group-23-django-migrate-sql-deux-django60' and extra == 'group-23-django-migrate-sql-deux-django61')" },
@@ -301,7 +301,7 @@ dev = [
     { name = "django-stubs" },
     { name = "mypy" },
     { name = "psycopg" },
-    { name = "psycopg", extra = ["binary"], marker = "python_full_version < '3.15' or (extra == 'group-23-django-migrate-sql-deux-django52' and extra == 'group-23-django-migrate-sql-deux-django60') or (extra == 'group-23-django-migrate-sql-deux-django52' and extra == 'group-23-django-migrate-sql-deux-django61') or (extra == 'group-23-django-migrate-sql-deux-django60' and extra == 'group-23-django-migrate-sql-deux-django61')" },
+    { name = "psycopg", extra = ["binary"], marker = "python_full_version < '3.15'" },
     { name = "pytest" },
     { name = "pytest-django" },
 ]
@@ -495,7 +495,7 @@ version = "2.4.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "ast-serialize" },
-    { name = "librt", marker = "platform_python_implementation != 'PyPy' or (extra == 'group-23-django-migrate-sql-deux-django52' and extra == 'group-23-django-migrate-sql-deux-django60') or (extra == 'group-23-django-migrate-sql-deux-django52' and extra == 'group-23-django-migrate-sql-deux-django61') or (extra == 'group-23-django-migrate-sql-deux-django60' and extra == 'group-23-django-migrate-sql-deux-django61')" },
+    { name = "librt", marker = "platform_python_implementation != 'PyPy'" },
     { name = "mypy-extensions" },
     { name = "pathspec" },
     { name = "typing-extensions" },
@@ -590,8 +590,8 @@ name = "psycopg"
 version = "3.3.6"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions", marker = "python_full_version < '3.13' or (extra == 'group-23-django-migrate-sql-deux-django52' and extra == 'group-23-django-migrate-sql-deux-django60') or (extra == 'group-23-django-migrate-sql-deux-django52' and extra == 'group-23-django-migrate-sql-deux-django61') or (extra == 'group-23-django-migrate-sql-deux-django60' and extra == 'group-23-django-migrate-sql-deux-django61')" },
-    { name = "tzdata", marker = "sys_platform == 'win32' or (extra == 'group-23-django-migrate-sql-deux-django52' and extra == 'group-23-django-migrate-sql-deux-django60') or (extra == 'group-23-django-migrate-sql-deux-django52' and extra == 'group-23-django-migrate-sql-deux-django61') or (extra == 'group-23-django-migrate-sql-deux-django60' and extra == 'group-23-django-migrate-sql-deux-django61')" },
+    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
+    { name = "tzdata", marker = "sys_platform == 'win32'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/76/26/3ea4ca5eaea1c0debcdf7ee7c1613fbe721dc27a03c461c0817ffd8a0601/psycopg-3.3.6.tar.gz", hash = "sha256:c081f2250df751a943036e42db6df4571c66cd0aabe8291a7a506512b12007d2", size = 168171, upload-time = "2026-09-18T13:22:55.152Z" }
 wheels = [
@@ -600,7 +600,7 @@ wheels = [
 
 [package.optional-dependencies]
 binary = [
-    { name = "psycopg-binary", marker = "(python_full_version < '3.15' and implementation_name != 'pypy') or (extra == 'group-23-django-migrate-sql-deux-django52' and extra == 'group-23-django-migrate-sql-deux-django60') or (extra == 'group-23-django-migrate-sql-deux-django52' and extra == 'group-23-django-migrate-sql-deux-django61') or (extra == 'group-23-django-migrate-sql-deux-django60' and extra == 'group-23-django-migrate-sql-deux-django61')" },
+    { name = "psycopg-binary", marker = "implementation_name != 'pypy'" },
 ]
 
 [[package]]
@@ -679,7 +679,7 @@ name = "pytest"
 version = "9.2.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'group-23-django-migrate-sql-deux-django52' and extra == 'group-23-django-migrate-sql-deux-django60') or (extra == 'group-23-django-migrate-sql-deux-django52' and extra == 'group-23-django-migrate-sql-deux-django61') or (extra == 'group-23-django-migrate-sql-deux-django60' and extra == 'group-23-django-migrate-sql-deux-django61')" },
+    { name = "colorama", marker = "sys_platform == 'win32'" },
     { name = "iniconfig" },
     { name = "packaging" },
     { name = "pluggy" },
