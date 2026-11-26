@@ -102,12 +102,14 @@ def build_current_graph():
     """
     graph = SQLStateGraph()
     for app_name, config in apps.app_configs.items():
+        module_name = f"{config.module.__name__}.{SQL_CONFIG_MODULE}"
         try:
-            module = import_module(".".join((config.module.__name__, SQL_CONFIG_MODULE)))
-            sql_items = module.sql_items
-        except (ImportError, AttributeError):
+            module = import_module(module_name)
+        except ModuleNotFoundError as exc:
+            if exc.name != module_name:
+                raise
             continue
-        for sql_item in sql_items:
+        for sql_item in getattr(module, "sql_items", ()):
             graph.add_node((app_name, sql_item.name), sql_item)
 
             for dep in sql_item.dependencies:
